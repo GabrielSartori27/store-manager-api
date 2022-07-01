@@ -1,8 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const { listAllProducts, listProductById } = require('./controllers/productsController');
 
 const app = express();
+app.use(bodyParser.json());
 
-// Starting new project!
+app.get('/products', listAllProducts);
+
+app.get('/products/:id', listProductById);
 
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {
