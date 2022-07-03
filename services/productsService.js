@@ -1,11 +1,11 @@
-const productsModel = require('../models/productsModel');
+const ProductsModel = require('../models/productsModel');
 
-const lisAllProducts = async () => {
-  const products = await productsModel.getAllProducts();
-  if (!products) return false;
-  return products;
+const listAllProducts = async () => {
+  const products = await ProductsModel.getAllProducts();
+  if (!products) return { code: 404, message: 'Products not found' };
+  return { code: 200, products };
 };
 
 module.exports = {
-  lisAllProducts,
+  listAllProducts,
 };
