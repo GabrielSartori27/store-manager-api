@@ -15,10 +15,12 @@ const addProduct = async (productName) => {
 
 const getById = async (id) => {
   const [result] = await connection
-    .execute('SELECT id FROM StoreManager.products WHERE id = ?', [id]);
-
+    .execute('SELECT * FROM StoreManager.products WHERE id = ?', [id]);
+  
   return result[0];
 };
+
+getById(2);
 
 const updateProduct = async (id, newName) => {
     await connection

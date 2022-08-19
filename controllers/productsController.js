@@ -8,9 +8,8 @@ const listAllProducts = async (req, res) => {
 
 const listProductById = async (req, res) => {
   const { id } = req.params;
-  const { code, products } = await ProductsService.listAllProducts();
-  const product = products.find((element) => element.id === Number(id));
-  if (!product) return res.status(404).json({ message: 'Product not found' });
+  const { code, message, product } = await ProductsService.listProductById(id);
+  if (message) return res.status(code).json({ message });
   return res.status(code).json(product);
 };
 

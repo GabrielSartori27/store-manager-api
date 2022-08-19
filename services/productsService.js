@@ -6,6 +6,12 @@ const listAllProducts = async () => {
   return { code: 200, products };
 };
 
+const listProductById = async (id) => {
+  const product = await ProductsModel.getById(id);
+  if (!product) return { code: 404, message: 'Product not found' };
+  return { code: 200, product };
+};
+
 const validateName = (name) => {
   if (!name) return { code: 400, message: '"name" is required' };
   if (name.length < 5) {
@@ -39,6 +45,7 @@ const deleteProduct = async (id) => {
 
 module.exports = {
   listAllProducts,
+  listProductById,
   addProduct,
   updateProduct,
   deleteProduct,

@@ -20,6 +20,8 @@ app.get('/sales', SalesController.listAllSales);
 
 app.get('/sales/:id', SalesController.listSaleById);
 
+app.post('/sales', SalesController.addSale);
+
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.send();

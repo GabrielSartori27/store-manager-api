@@ -13,7 +13,15 @@ const listSaleById = async (req, res) => {
   return res.status(code).json(sale);
 };
 
+const addSale = async (req, res) => {
+  const sales = req.body;
+  const { code, message, createdSale } = await SalesService.addSale(sales);
+  if (message) return res.status(code).json({ message });
+  return res.status(code).json(createdSale);
+};
+
 module.exports = {
   listAllSales,
   listSaleById,
+  addSale,
 };
