@@ -28,6 +28,15 @@ const addProduct = async (productName) => {
   return { code: 201, id, productName: name };
 };
 
+const searchProduct = async (query) => {
+  if (!query) {
+    const products = await ProductsModel.getAllProducts();
+    return { code: 200, products };
+  };
+  const products = await ProductsModel.searchProduct(query);
+  return { code: 200, products };
+}
+
 const updateProduct = async (productId, newName) => {
   if (validateName(newName)) return validateName(newName);
   const checkId = await ProductsModel.getById(productId);
@@ -46,6 +55,7 @@ const deleteProduct = async (id) => {
 module.exports = {
   listAllProducts,
   listProductById,
+  searchProduct,
   addProduct,
   updateProduct,
   deleteProduct,

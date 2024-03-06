@@ -6,6 +6,7 @@ const SalesController = require('./controllers/salesController');
 const app = express();
 app.use(bodyParser.json());
 
+app.get('/products/search', ProductsController.searchProduct);
 app.get('/products', ProductsController.listAllProducts);
 app.get('/products/:id', ProductsController.listProductById);
 app.post('/products', ProductsController.addNewProduct);
