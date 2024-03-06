@@ -61,6 +61,18 @@ const addSale = async (sales) => {
   return { code: 201, createdSale };
 };
 
+const updateSale = async (id, products) => {
+  const fieldsResult = validateFields(products);
+  if (fieldsResult) return { code: fieldsResult.code, message: fieldsResult.message };
+  const productIdResult = await validateProductId(products);
+  if (productIdResult) return { code: productIdResult.code, message: productIdResult.message };
+  const sale = await SalesModel.getSaleById(id);
+  if (!sale[0]) return { code: 404, message: "Sale not found" };
+  const updated = await SalesModel.updateSale(id, products);
+  const updatedSale = { saleId: id, itemsUpdated: updated };
+  return { code: 200, updatedSale };
+}
+
 const deleteSale = async (id) => {
   const checkId = await SalesModel.getSaleById(id);
   if (!checkId[0]) return { code: 404, message: 'Sale not found' };
@@ -72,5 +84,6 @@ module.exports = {
   getAllSales,
   getSaleById,
   addSale,
+  updateSale,
   deleteSale,
 };
