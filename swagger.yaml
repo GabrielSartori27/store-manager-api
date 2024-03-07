@@ -1,0 +1,310 @@
+openapi: 3.0.1
+info:
+  title: Store Manager API
+  description: API to control products and sales.
+  version: '1.0'
+  contact:
+    name: My Linkedin
+    url: https://www.linkedin.com/in/gabriel-sartori-b9b44622a/
+externalDocs:
+  description: Project on GitHub
+  url: https://github.com/GabrielSartori27/blogs-api
+servers:
+- url: http://localhost:3000
+  description: Local API
+paths:
+  /products:
+    get:
+      tags:
+        [Products]
+      summary: Get all products
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Products"
+    post:
+      tags:
+        [Products]
+      summary: Create new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    minLength: 5
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+                
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              example: "Invalid field"
+  /products/search:
+    parameters:
+    - in: query
+      name: q
+      schema: 
+        type: string
+        description: Product name
+    get:
+      tags:
+        [Products]
+      summary: Get product by query
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Products"
+  /products/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      tags:
+        [Products]
+      summary: Get product by id
+      responses:
+        200:
+          description: Sucess
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        404:
+          description: Not found
+          content:
+            application/json:
+              example: "Product not found"
+    put:
+      tags: 
+        [Products]
+      summary: Update product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Product name"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        404:
+          description: Not found
+          content:
+            application/json:
+              example: "Product not found"
+    delete:
+      tags:
+        [Products]
+      summary: Delete product
+      responses:
+        204:
+          description: OK
+        404:
+          description: Not found
+          content:
+            application/json:
+              example: "Product not found"
+  /sales:
+    get:
+      tags:
+        [Sales]
+      summary: Get all sales
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sales"
+    post:
+      tags:
+        [Sales]
+      summary: Create new sale
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  productId:
+                    type: integer
+                    example: 1
+                  quantity:
+                    type: integer
+                    example: 10
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 1
+                  itemsSold:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        productId:
+                          type: integer
+                          example: 1
+                        quantity:
+                          type: integer
+                          example: 10
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              example: "Invalid field"
+        404:
+          description: Not found
+          content:
+            application/json:
+              example: "Product not found"
+  /sales/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      tags:
+        [Sales]
+      summary: Get sale by id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Sales"
+        404:
+          description: Not found
+          content:
+            application/json:
+              example: "Sale not found"
+    put:
+      tags: 
+        [Sales]
+      summary: Update sale
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  productId:
+                    type: integer
+                    example: 1
+                  quantity:
+                    type: integer
+                    example: 10
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  saleId:
+                    type: number
+                    example: 1
+                  itemsUpdated:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        productId:
+                          type: integer
+                          example: 1
+                        quantity:
+                          type: integer
+                          example: 10
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              example: "Invalid field"
+        404:
+          description: Not found
+          content:
+            application/json:
+              example: "Sale not found"
+    delete:
+      tags:
+        [Sales]
+      summary: Delete sale
+      responses:
+        204:
+          description: Deleted
+        404:
+          description: Not Found
+          content:
+            application/json:
+              example: "Sale not found"
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Product name
+    Sales:
+      type: object
+      properties:
+          saleId:
+            type: integer
+            example: 1
+          productId:
+            type: integer
+            example: 1
+          quantity:
+            type: integer
+            example: 10
+          date:
+            type: string
+            example: "2023-09-09T04:54:54.000Z"

@@ -95,15 +95,15 @@
     "containerId": "",
     "name": "http://localhost:3000/sales/3",
     "url": "http://localhost:3000/sales/1",
-    "method": "PUT",
+    "method": "GET",
     "sortNum": 0,
     "created": "2024-03-05T20:23:43.225Z",
-    "modified": "2024-03-06T01:47:09.690Z",
+    "modified": "2024-03-06T23:13:29.950Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "  [\n    {\n      \"productId\": 1,\n      \"quantity\":10\n    },\n    {\n      \"productId\": 2,\n      \"quantity\":50\n    }\n  ]",
+      "raw": "  [\n    {\n      \"productId\": 1,\n      \"quantity\":10\n    }\n  ]",
       "form": []
     },
     "tests": []
