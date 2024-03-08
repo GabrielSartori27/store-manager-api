@@ -18,16 +18,10 @@ const validateFields = (sales) => {
   sales.forEach((sale) => {
     if (!sale.productId) result.push({ code: 400, message: '"productId" is required' });
     if (!sale.quantity && sale.quantity !== 0) {
- result
-      .push({ code: 400, message: '"quantity" is required' }); 
+        result.push({ code: 400, message: '"quantity" is required' }); 
 }
     if (sale.quantity <= 0) {
- result.push(
-        {
-          code: 422,
-          message: '"quantity" must be greater than or equal to 1',
-        },
-      ); 
+        result.push({ code: 422, message: '"quantity" must be greater than or equal to 1' }); 
 }
     });
   return result[0];
@@ -67,11 +61,11 @@ const updateSale = async (id, products) => {
   const productIdResult = await validateProductId(products);
   if (productIdResult) return { code: productIdResult.code, message: productIdResult.message };
   const sale = await SalesModel.getSaleById(id);
-  if (!sale[0]) return { code: 404, message: "Sale not found" };
+  if (!sale[0]) return { code: 404, message: 'Sale not found' };
   const updated = await SalesModel.updateSale(id, products);
   const updatedSale = { saleId: id, itemsUpdated: updated };
   return { code: 200, updatedSale };
-}
+};
 
 const deleteSale = async (id) => {
   const checkId = await SalesModel.getSaleById(id);

@@ -17,7 +17,7 @@ const searchProduct = async (req, res) => {
   const { q } = req.query;
   const { code, products } = await ProductsService.searchProduct(q);
   return res.status(code).json(products);
-}
+};
 
 const addNewProduct = async (req, res) => {
   const { name } = req.body;

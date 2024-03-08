@@ -32,10 +32,10 @@ const searchProduct = async (query) => {
   if (!query) {
     const products = await ProductsModel.getAllProducts();
     return { code: 200, products };
-  };
+  }
   const products = await ProductsModel.searchProduct(query);
   return { code: 200, products };
-}
+};
 
 const updateProduct = async (productId, newName) => {
   if (validateName(newName)) return validateName(newName);

@@ -1,16 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const ProductsController = require('./controllers/productsController');
-const SalesController = require('./controllers/salesController');
 const path = require('path');
 const swaggerUi = require('swagger-ui-express');
 const fs = require('fs');
 const YAML = require('yaml');
 
-const swagger_path = path.resolve(__dirname, './swagger.yaml');
-const file = fs.readFileSync(swagger_path, 'utf8');
+const swaggerPath = path.resolve(__dirname, './swagger.yaml');
+const file = fs.readFileSync(swaggerPath, 'utf8');
 const swaggerDocument = YAML.parse(file);
 const cors = require('cors');
+const SalesController = require('./controllers/salesController');
+const ProductsController = require('./controllers/productsController');
 
 const app = express();
 app.use(bodyParser.json());

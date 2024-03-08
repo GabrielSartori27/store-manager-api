@@ -25,7 +25,7 @@ const searchProduct = async (query) => {
     .execute('SELECT * FROM StoreManager.products WHERE name LIKE ?', [`%${query}%`]);
   
   return result;
-}
+};
 
 const updateProduct = async (id, newName) => {
     await connection

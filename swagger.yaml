@@ -8,7 +8,7 @@ info:
     url: https://www.linkedin.com/in/gabriel-sartori-b9b44622a/
 externalDocs:
   description: Project on GitHub
-  url: https://github.com/GabrielSartori27/blogs-api
+  url: https://github.com/GabrielSartori27/store-manager-api
 servers:
 - url: http://localhost:3000
   description: Local API

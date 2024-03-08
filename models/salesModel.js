@@ -47,7 +47,7 @@ const updateSale = async (saleId, products) => {
       + 'INNER JOIN StoreManager.sales '
       + 'ON sales_products.sale_id = sales.id AND sales_products.sale_id = ?', [saleId]);
   return result;
-}
+};
 
 const deleteSale = async (id) => {
   await connection
