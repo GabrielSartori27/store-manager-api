@@ -9,7 +9,7 @@ Os arquivos connection.js, migration.sql e seed.sql já vieram confugurados pela
 
 >Importante: o diagrama apresentado e de propriedade da [Trybe](https://www.betrybe.com/).
 
-## Técnologias utilizadas
+## Tecnologias utilizadas
 
 NodeJS, ExpressJS, MySQL, ES6, Mocha, sinon, chai.
 
