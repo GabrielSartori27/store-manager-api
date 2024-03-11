@@ -1,10 +1,9 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
-const connection = require('../../../models/connection');
+const { connection } = require('../../../models/connection');
 const ProductsModel = require('../../../models/productsModel');
 
 describe('get products from databse', () => {
-
   before(async () => {
     const execute = [[
       {

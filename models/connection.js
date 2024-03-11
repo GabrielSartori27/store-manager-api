@@ -1,12 +1,25 @@
-const mysql = require('mysql2/promise');
+const fs = require('fs')
+const path = require('path')
+const mysql = require('mysql2/promise')
+require('dotenv').config();
+const { cwd } = process;
 
-require('dotenv').config(); // não se esqueça de configurar suas variáveis de ambiente aqui na configuração
-
-const connection = mysql.createPool({
+const connect = () => mysql.createPool({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE || 'StoreManager',
-});
+  multipleStatements: true
+})
 
-module.exports = connection;
+const runSql = (file) => async () => {
+  const db = connect();
+  const sql = fs.readFileSync(file, 'utf8');
+  await db.query(sql);
+  await db.end();
+}
+
+const runMigration = runSql(path.resolve(cwd(), 'migration.sql'))
+const runSeed = runSql(path.resolve(cwd(), 'seed.sql'))
+const connection = connect();
+
+module.exports = {connection, runMigration, runSeed};
